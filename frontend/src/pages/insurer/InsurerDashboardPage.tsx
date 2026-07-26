@@ -85,7 +85,7 @@ export default function InsurerDashboardPage() {
               <MetricCard
                 title="Approved Claims"
                 value={approvedCount}
-                subtitle={`${rejectedCount} rejected`}
+                subtitle="Approved for reimbursement"
                 icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
               />
               <MetricCard
@@ -244,7 +244,7 @@ export default function InsurerDashboardPage() {
                     <div className="text-left sm:text-right">
                       <div className="text-xs text-slate-500">Requested</div>
                       <div className="text-sm font-bold text-slate-900">
-                        {formatCurrency(claim.claimAmount)}
+                        {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
                       </div>
                     </div>
 

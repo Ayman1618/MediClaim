@@ -223,11 +223,11 @@ export default function MyClaimsPage() {
                     <div className="text-left sm:text-right">
                       <div className="text-xs text-slate-500">Requested</div>
                       <div className="text-sm font-bold text-slate-900">
-                        {formatCurrency(claim.claimAmount)}
+                        {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
                       </div>
                       {claim.status === 'APPROVED' && claim.approvedAmount != null && (
                         <div className="text-[11px] font-semibold text-emerald-700">
-                          Approved: {formatCurrency(claim.approvedAmount)}
+                          Approved: {formatCurrency(claim.approvedAmount, { omitZeroPaise: true })}
                         </div>
                       )}
                     </div>

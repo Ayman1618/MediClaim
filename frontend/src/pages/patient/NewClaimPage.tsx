@@ -182,9 +182,9 @@ export default function NewClaimPage() {
                   </span>
                 </div>
                 <div>
-                  <span className="text-xs text-slate-500 block">Claim Amount</span>
+                  <span className="text-xs text-slate-500 block">Requested Amount</span>
                   <span className="font-bold text-slate-900">
-                    {formatCurrency(createdClaim.claimAmount)}
+                    {formatCurrency(createdClaim.claimAmount, { omitZeroPaise: true })}
                   </span>
                 </div>
                 <div>

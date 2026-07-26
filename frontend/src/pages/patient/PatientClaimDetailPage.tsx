@@ -104,7 +104,7 @@ export default function PatientClaimDetailPage() {
                 Requested Amount
               </span>
               <span className="text-2xl font-bold text-slate-900">
-                {formatCurrency(claim.claimAmount)}
+                {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
               </span>
             </div>
           </div>
@@ -127,10 +127,10 @@ export default function PatientClaimDetailPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-emerald-200/60">
                 <div>
                   <span className="text-xs text-emerald-700 font-medium block">
-                    Approved Reimbursement Amount
+                    Approved Amount
                   </span>
                   <span className="text-xl font-bold text-emerald-900">
-                    {formatCurrency(claim.approvedAmount)}
+                    {formatCurrency(claim.approvedAmount, { omitZeroPaise: true })}
                   </span>
                 </div>
                 {claim.insurerComments && (

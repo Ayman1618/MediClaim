@@ -326,11 +326,11 @@ export default function InsurerClaimsPage() {
                             {formatDate(claim.submittedAt)}
                           </td>
                           <td className="py-3.5 px-4 text-right font-bold text-slate-900">
-                            {formatCurrency(claim.claimAmount)}
+                            {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
                           </td>
                           <td className="py-3.5 px-4 text-right font-medium text-slate-700">
                             {claim.status === 'APPROVED' && claim.approvedAmount != null
-                              ? formatCurrency(claim.approvedAmount)
+                              ? formatCurrency(claim.approvedAmount, { omitZeroPaise: true })
                               : '—'}
                           </td>
                           <td className="py-3.5 px-4 text-center">
@@ -378,7 +378,7 @@ export default function InsurerClaimsPage() {
                         <div>
                           <span className="text-slate-400 block text-[10px]">Requested</span>
                           <span className="font-bold text-slate-900">
-                            {formatCurrency(claim.claimAmount)}
+                            {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
                           </span>
                         </div>
 
@@ -386,7 +386,7 @@ export default function InsurerClaimsPage() {
                           <div>
                             <span className="text-slate-400 block text-[10px]">Approved</span>
                             <span className="font-bold text-emerald-700">
-                              {formatCurrency(claim.approvedAmount)}
+                              {formatCurrency(claim.approvedAmount, { omitZeroPaise: true })}
                             </span>
                           </div>
                         )}

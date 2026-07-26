@@ -92,12 +92,12 @@ export default function PatientDashboardPage() {
               <MetricCard
                 title="Approved Claims"
                 value={approvedClaims}
-                subtitle={`${rejectedClaims} rejected`}
+                subtitle="Approved for reimbursement"
                 icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
               />
               <MetricCard
                 title="Total Approved"
-                value={formatCurrency(totalApprovedPaise)}
+                value={formatCurrency(totalApprovedPaise, { omitZeroPaise: true })}
                 subtitle="Reimbursed to date"
                 variant="highlight"
                 icon={<IndianRupee className="w-5 h-5 text-blue-400" />}
@@ -226,11 +226,11 @@ export default function PatientDashboardPage() {
                     <div className="text-left sm:text-right">
                       <div className="text-xs text-slate-500">Requested</div>
                       <div className="text-sm font-bold text-slate-900">
-                        {formatCurrency(claim.claimAmount)}
+                        {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
                       </div>
                       {claim.status === 'APPROVED' && claim.approvedAmount != null && (
                         <div className="text-[11px] font-medium text-emerald-700">
-                          Approved: {formatCurrency(claim.approvedAmount)}
+                          Approved: {formatCurrency(claim.approvedAmount, { omitZeroPaise: true })}
                         </div>
                       )}
                     </div>

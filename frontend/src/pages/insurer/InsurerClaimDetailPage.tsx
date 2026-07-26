@@ -195,10 +195,10 @@ export default function InsurerClaimDetailPage() {
 
           <div className="text-left sm:text-right">
             <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider block">
-              Requested Claim Amount
+              Requested Amount
             </span>
             <span className="text-2xl font-bold text-slate-900">
-              {formatCurrency(claim.claimAmount)}
+              {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
             </span>
           </div>
         </div>
@@ -448,13 +448,13 @@ export default function InsurerClaimDetailPage() {
                   <div className="p-4 bg-emerald-50/90 rounded-xl border border-emerald-200 text-emerald-950 space-y-3">
                     <div className="flex items-center gap-2 font-bold text-emerald-900 text-sm">
                       <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                      <span>Approved Reimbursement</span>
+                      <span>Approved Claim</span>
                     </div>
 
                     <div className="pt-1">
                       <span className="text-xs text-emerald-700 block">Approved Amount</span>
                       <span className="text-2xl font-bold text-emerald-900">
-                        {formatCurrency(claim.approvedAmount)}
+                        {formatCurrency(claim.approvedAmount, { omitZeroPaise: true })}
                       </span>
                     </div>
 
@@ -535,7 +535,7 @@ export default function InsurerClaimDetailPage() {
                 <div className="flex justify-between">
                   <span className="text-slate-500">Requested Amount:</span>
                   <span className="font-bold text-slate-900">
-                    {formatCurrency(claim.claimAmount)}
+                    {formatCurrency(claim.claimAmount, { omitZeroPaise: true })}
                   </span>
                 </div>
 
@@ -543,7 +543,7 @@ export default function InsurerClaimDetailPage() {
                   <div className="flex justify-between font-bold text-emerald-800 pt-1 border-t border-slate-200">
                     <span>Approved Amount:</span>
                     <span>
-                      {formatCurrency(inrToPaise(parseFloat(approvedAmountInr)))}
+                      {formatCurrency(inrToPaise(parseFloat(approvedAmountInr)), { omitZeroPaise: true })}
                     </span>
                   </div>
                 )}
