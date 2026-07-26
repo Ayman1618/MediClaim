@@ -16,7 +16,7 @@ Patients can submit reimbursement claims, upload supporting medical evidence (bi
 - **Drag-and-Drop File Uploads**: Client-side format (PDF, JPG, PNG) and size validation (max 10MB) with upload preview and removal.
 - **Submission Confirmation**: Immediate post-submission view displaying reference ID, timestamp, and requested amount.
 - **Claim Detail & Document Viewer**: View treatment description, policyholder details, supporting documents, and decision banners.
-- **Audit Activity History**: Real-time chronological audit trail of all claim events (`CLAIM_SUBMITTED`, `CLAIM_APPROVED`, `CLAIM_REJECTED`).
+- **Claim Activity History**: Chronological record of all claim events (`CLAIM_SUBMITTED`, `CLAIM_APPROVED`, `CLAIM_REJECTED`).
 
 ### Insurer Experience
 - **Insurer Operational Dashboard**: Aggregated operational metrics (Total, Pending, Approved, Rejected) and financial summary (Total Requested vs. Total Approved).
@@ -82,8 +82,8 @@ Submit Claim + Document ──►  PENDING  ──► Search & Review
         Approved Amount (₹)     Rejection Reason
                        └───────┬───────┘
                                ▼
-                   Patient Views Decision &
-                 Immutable Activity Timeline
+                    Patient Views Decision &
+                  Claim Activity Timeline
 ```
 
 ---
@@ -94,7 +94,7 @@ Submit Claim + Document ──►  PENDING  ──► Search & Review
 2. **Atomic Human-Readable Claim IDs**: Claim reference IDs (`CLM-YYYY-NNNNN`, e.g., `CLM-2026-00001`) are generated server-side using an atomic MongoDB `$inc` counter on a dedicated `Counter` collection.
 3. **Server-Side Authorization Depth**: Frontend route guards provide smooth UX redirects, while server-side NestJS guards (`JwtAuthGuard` and `RolesGuard`) authoritatively enforce role and ownership checks.
 4. **Persistent Upload Metadata**: Uploaded document metadata is persisted in a MongoDB `UploadMetadata` collection upon upload, ensuring metadata survives server restarts.
-5. **Immutable Audit History**: Every state transition appends a real event object to the claim's `activity[]` array with an exact ISO timestamp and human-readable audit description.
+5. **Claim Activity History**: Each claim lifecycle event appends an event to the claim's `activity[]` array with its timestamp and description, providing a chronological record of submission and insurer decisions.
 
 ---
 
