@@ -9,10 +9,14 @@ import * as fs from 'fs';
 import { UploadsController } from './uploads.controller';
 import { UploadsService } from './uploads.service';
 import { Claim, ClaimSchema } from '../claims/schemas/claim.schema';
+import { UploadMetadata, UploadMetadataSchema } from './schemas/upload-metadata.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Claim.name, schema: ClaimSchema }]),
+    MongooseModule.forFeature([
+      { name: Claim.name, schema: ClaimSchema },
+      { name: UploadMetadata.name, schema: UploadMetadataSchema },
+    ]),
     MulterModule.registerAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {

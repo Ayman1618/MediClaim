@@ -90,7 +90,7 @@ export class UploadsController {
       uploadedAt: new Date(),
     };
 
-    this.uploadsService.storeMetadata(meta);
+    await this.uploadsService.storeMetadata(meta);
 
     return {
       storedName: file.filename,
@@ -133,7 +133,7 @@ export class UploadsController {
     }
 
     // Look up MIME type from metadata store, fall back to octet-stream
-    const meta = this.uploadsService.getMetadata(safeFilename);
+    const meta = await this.uploadsService.getMetadata(safeFilename);
     const contentType = meta?.mimeType ?? 'application/octet-stream';
 
     res.setHeader('Content-Type', contentType);

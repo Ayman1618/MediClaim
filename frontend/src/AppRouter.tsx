@@ -18,6 +18,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { RequireAuth, RedirectIfAuthenticated } from '@/components/RouteGuards';
 import LoginPage from '@/pages/LoginPage';
 import PatientDashboardPage from '@/pages/patient/PatientDashboardPage';
+import MyClaimsPage from '@/pages/patient/MyClaimsPage';
 import NewClaimPage from '@/pages/patient/NewClaimPage';
 import PatientClaimDetailPage from '@/pages/patient/PatientClaimDetailPage';
 import InsurerDashboardPage from '@/pages/insurer/InsurerDashboardPage';
@@ -38,6 +39,7 @@ export default function AppRouter() {
         {/* Patient routes */}
         <Route element={<RequireAuth requiredRole="PATIENT" />}>
           <Route path="/app" element={<PatientDashboardPage />} />
+          <Route path="/app/claims" element={<MyClaimsPage />} />
           <Route path="/app/claims/new" element={<NewClaimPage />} />
           <Route path="/app/claims/:claimId" element={<PatientClaimDetailPage />} />
         </Route>
