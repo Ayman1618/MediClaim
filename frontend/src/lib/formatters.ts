@@ -5,17 +5,31 @@
  * Always use these helpers — never format money inline.
  */
 
+interface FormatCurrencyOptions {
+  /** Omit .00 when amount has no paise (e.g. ₹6,03,700 instead of ₹6,03,700.00) */
+  omitZeroPaise?: boolean;
+}
+
 /**
  * Convert paise integer to formatted INR string.
  * @example formatCurrency(125000) → "₹1,250.00"
+ * @example formatCurrency(125000, { omitZeroPaise: true }) → "₹1,250"
  */
-export function formatCurrency(paise: number | null | undefined): string {
+export function formatCurrency(
+  paise: number | null | undefined,
+  opts?: FormatCurrencyOptions,
+): string {
   if (paise == null) return '—';
   const inr = paise / 100;
+  const isWholeRupee = paise % 100 === 0;
+
+  const fractionDigits = opts?.omitZeroPaise && isWholeRupee ? 0 : 2;
+
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
   }).format(inr);
 }
 

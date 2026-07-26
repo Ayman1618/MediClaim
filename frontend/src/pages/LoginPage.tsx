@@ -176,10 +176,6 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-
-        <p className="text-center text-xs text-slate-500 mt-6">
-          Protected by role-based backend JWT authorization and SSL encryption.
-        </p>
       </div>
     </div>
   );

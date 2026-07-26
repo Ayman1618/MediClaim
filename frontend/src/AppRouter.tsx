@@ -22,6 +22,7 @@ import MyClaimsPage from '@/pages/patient/MyClaimsPage';
 import NewClaimPage from '@/pages/patient/NewClaimPage';
 import PatientClaimDetailPage from '@/pages/patient/PatientClaimDetailPage';
 import InsurerDashboardPage from '@/pages/insurer/InsurerDashboardPage';
+import InsurerClaimsPage from '@/pages/insurer/InsurerClaimsPage';
 import InsurerClaimDetailPage from '@/pages/insurer/InsurerClaimDetailPage';
 
 export default function AppRouter() {
@@ -47,6 +48,7 @@ export default function AppRouter() {
         {/* Insurer routes */}
         <Route element={<RequireAuth requiredRole="INSURER" />}>
           <Route path="/insurer" element={<InsurerDashboardPage />} />
+          <Route path="/insurer/claims" element={<InsurerClaimsPage />} />
           <Route path="/insurer/claims/:claimId" element={<InsurerClaimDetailPage />} />
         </Route>
 

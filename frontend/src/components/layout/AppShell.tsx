@@ -9,6 +9,8 @@ import {
   ShieldCheck,
   Menu,
   X,
+  Building2,
+  UserCheck,
 } from 'lucide-react';
 
 interface AppShellProps {
@@ -25,26 +27,44 @@ export function AppShell({ children }: AppShellProps) {
     navigate('/login');
   };
 
-  const navItems = [
-    {
-      label: 'Overview',
-      to: '/app',
-      icon: <LayoutDashboard className="w-4 h-4" />,
-      end: true,
-    },
-    {
-      label: 'My Claims',
-      to: '/app/claims',
-      icon: <FileText className="w-4 h-4" />,
-      end: false,
-    },
-    {
-      label: 'Submit Claim',
-      to: '/app/claims/new',
-      icon: <PlusCircle className="w-4 h-4" />,
-      end: false,
-    },
-  ];
+  const isInsurer = user?.role === 'INSURER';
+  const homePath = isInsurer ? '/insurer' : '/app';
+
+  const navItems = isInsurer
+    ? [
+        {
+          label: 'Overview',
+          to: '/insurer',
+          icon: <LayoutDashboard className="w-4 h-4" />,
+          end: true,
+        },
+        {
+          label: 'Claims',
+          to: '/insurer/claims',
+          icon: <FileText className="w-4 h-4" />,
+          end: false,
+        },
+      ]
+    : [
+        {
+          label: 'Overview',
+          to: '/app',
+          icon: <LayoutDashboard className="w-4 h-4" />,
+          end: true,
+        },
+        {
+          label: 'My Claims',
+          to: '/app/claims',
+          icon: <FileText className="w-4 h-4" />,
+          end: false,
+        },
+        {
+          label: 'Submit Claim',
+          to: '/app/claims/new',
+          icon: <PlusCircle className="w-4 h-4" />,
+          end: false,
+        },
+      ];
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900 antialiased">
@@ -54,7 +74,7 @@ export function AppShell({ children }: AppShellProps) {
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo & Wordmark */}
             <div className="flex items-center gap-8">
-              <Link to="/app" className="flex items-center gap-2.5 group">
+              <Link to={homePath} className="flex items-center gap-2.5 group">
                 <div className="w-9 h-9 rounded-lg bg-slate-900 flex items-center justify-center text-white shadow-xs group-hover:bg-slate-800 transition-colors">
                   <ShieldCheck className="w-5 h-5 text-blue-400" />
                 </div>
@@ -94,12 +114,26 @@ export function AppShell({ children }: AppShellProps) {
             <div className="hidden md:flex items-center gap-4">
               <div className="text-right">
                 <p className="text-sm font-semibold text-slate-900 leading-tight">
-                  {user?.name || 'Patient User'}
+                  {user?.name || (isInsurer ? 'Insurer Admin' : 'Patient User')}
                 </p>
                 <div className="flex items-center justify-end gap-1.5 mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    {user?.role || 'Patient'}
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      isInsurer ? 'bg-blue-600' : 'bg-emerald-500'
+                    }`}
+                  />
+                  <span className="text-xs font-medium text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                    {isInsurer ? (
+                      <>
+                        <Building2 className="w-3 h-3 text-slate-400 inline" />
+                        <span>Insurer</span>
+                      </>
+                    ) : (
+                      <>
+                        <UserCheck className="w-3 h-3 text-slate-400 inline" />
+                        <span>Patient</span>
+                      </>
+                    )}
                   </span>
                 </div>
               </div>
